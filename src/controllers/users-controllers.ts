@@ -25,9 +25,19 @@ export async function getProfileById(req: Request, res: Response) {
   res.status(httpStatus.OK).send(profile);
 }
 
+export async function updateProfileId(req: Request, res: Response) {
+  const { name, lastName, birthday, phone, email, password, profileUrl } = req.body as InputUsers;
+  const id = Number(req.params.id);
+
+  const result = await usersService.updateUserProfile(id, name, lastName, birthday, phone, email, password, profileUrl);
+  
+  return res.status(httpStatus.OK).send(result);
+}
+
 
 export const usersController = {
   userRegister,
   userLogin,
-  getProfileById
+  getProfileById,
+  updateProfileId
 };

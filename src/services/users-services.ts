@@ -36,8 +36,19 @@ async function getProfileById(id: number) {
   return profile;
 }
 
+async function updateUserProfile(id: number, name: string, lastName: string, birthday: Date, phone: string, email: string, password: string, profileUrl: string) {
+  if (!id || isNaN(id)) throw invalidDataError('id does not exist');
+  
+  const profile = await usersRepository.findUserProfileById(id);
+  if (!profile) throw notFoundProfileError("Not able to find the profile");
+  
+  const userProfileData = { id, name, lastName, birthday, phone, email, password, profileUrl };
+  const userRegister = await usersRepository.updateUserProfile(userProfileData);
+}
+
 export const usersService = {
   createUserRegister,
   createUserLogin,
-  getProfileById
+  getProfileById,
+  updateUserProfile
 };

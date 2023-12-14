@@ -1,3 +1,4 @@
+import { emailAlreadyExistsError } from '../errors/errors';
 import prisma from '../database';
 import { InputUsers } from '../protocols';
 import bcrypt from "bcrypt"
@@ -38,10 +39,42 @@ async function findUserProfileById(id: number) {
   });
 }
 
+async function updateUserProfile({ id, name, lastName, birthday, phone, email, password, profileUrl }) {
+  const existingUser = await prisma.user.findFirst({
+    where: {
+      email: email,
+      id: {
+        not: id,
+      },
+    },
+  });
+
+  if (existingUser) {
+    throw emailAlreadyExistsError("This email already exists!");
+  }
+
+  const hash = bcrypt.hashSync(password, 10);
+
+  return prisma.user.update({
+    where: { id },
+    data: {
+      name,
+      lastName,
+      birthday,
+      phone,
+      email,
+      password: hash,
+      profileUrl,
+    },
+  });
+}
+
+
 export const usersRepository = {
   createUserRegister,
   findUsers,
   createUserLogin,
   findSessionByToken,
-  findUserProfileById
+  findUserProfileById,
+  updateUserProfile
 };
