@@ -5,6 +5,7 @@ import 'express-async-errors';
 import cors from 'cors';
 import { usersRouter } from './routers/users-routers';
 import { handleApplicationErrors } from './middlewares/error-handling-middleware';
+import { postsRouter } from "./routers/post-routers";
 
 const app = express();
 
@@ -15,6 +16,7 @@ app
     res.status(httpStatus.OK).send("I'm ok!");
   })
   .use('/', usersRouter)
+  .use('/', postsRouter)
   .use(handleApplicationErrors);
 
 export default app;

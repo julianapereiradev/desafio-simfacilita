@@ -25,10 +25,16 @@ async function createUserLogin(userId: number) {
   });
 }
 
-
+async function findSessionByToken(token: string) {
+  return prisma.session.findFirst({
+    where: { token },
+    select: { id: true, userId: true, token: true },
+  });
+}
 
 export const usersRepository = {
   createUserRegister,
   findUsers,
-  createUserLogin
+  createUserLogin,
+  findSessionByToken
 };

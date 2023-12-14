@@ -21,3 +21,19 @@ export function invalidPasswordError(message?: string) {
     message: message || "This password is not correct.",
   };
 }
+
+export function invalidToken(message?: string) {
+  return {
+    type: "application",
+    code: 409,
+    message: message || "This token is invalid.",
+  };
+}
+
+export function userIdNotExist(message?: string) {
+  return {
+    type: "application",
+    code: 409,
+    message: message || "UserId does not exist",
+  };
+}
