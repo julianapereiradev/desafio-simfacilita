@@ -53,3 +53,7 @@ export type InputComment = {
   postId: number;
   comment: string;
 };
+
+export type InputFollow = {
+  followerId: number;
+};

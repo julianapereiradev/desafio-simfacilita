@@ -7,6 +7,7 @@ import { usersRouter } from './routers/users-routers';
 import { handleApplicationErrors } from './middlewares/error-handling-middleware';
 import { postsRouter } from "./routers/post-routers";
 import { commentsRouter } from "./routers/comments-routers";
+import { followsRouter } from "./routers/follows-routers";
 
 const app = express();
 
@@ -19,6 +20,7 @@ app
   .use('/', usersRouter)
   .use('/', postsRouter)
   .use('/', commentsRouter)
+  .use('/', followsRouter)
   .use(handleApplicationErrors);
 
 export default app;

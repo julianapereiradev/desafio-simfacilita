@@ -11,17 +11,19 @@ datasource db {
 }
 
 model User {
-  id             Int             @id @default(autoincrement())
-  name           String          @db.VarChar(255)
-  lastName       String          @db.VarChar(255)
+  id             Int      @id @default(autoincrement())
+  name           String   @db.VarChar(255)
+  lastName       String   @db.VarChar(255)
   birthday       DateTime
-  phone          String          @db.VarChar(255)
-  email          String          @unique @db.VarChar(255)
-  password       String          @db.VarChar(255)
-  profileUrl     String          
+  phone          String   @db.VarChar(255)
+  email          String   @unique @db.VarChar(255)
+  password       String   @db.VarChar(255)
+  profileUrl     String
   Session        Session[]
   Post           Post[]
   Comment        Comment[]
+  FollowedUsers  Follow[] @relation("Followed")
+  Followers      Follow[] @relation("Follower")
 }
 
 model Session {
@@ -34,10 +36,13 @@ model Session {
 }
 
 model Follow {
-  id Int @id @default(autoincrement())
-  followeId Int
+  id         Int  @id @default(autoincrement())
+  followerId Int
   followedId Int
+  User       User @relation("Follower", fields: [followerId], references: [id])
+  Followed   User @relation("Followed", fields: [followedId], references: [id])
 }
+
 
 model Post {
   id Int @id @default(autoincrement())
