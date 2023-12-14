@@ -32,9 +32,16 @@ async function findSessionByToken(token: string) {
   });
 }
 
+async function findUserProfileById(id: number) {
+  return prisma.user.findFirst({
+    where: { id },
+  });
+}
+
 export const usersRepository = {
   createUserRegister,
   findUsers,
   createUserLogin,
-  findSessionByToken
+  findSessionByToken,
+  findUserProfileById
 };

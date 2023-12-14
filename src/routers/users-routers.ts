@@ -8,5 +8,6 @@ const usersRouter = Router();
 
 usersRouter.post('/signup', validateSchemaMiddleware(usersSchema), usersController.userRegister);
 usersRouter.post('/signin', validateSchemaMiddleware(sessionsSchema), usersController.userLogin);
+usersRouter.get('/user/:id', usersController.getProfileById);
 
 export { usersRouter };

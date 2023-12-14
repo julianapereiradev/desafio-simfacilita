@@ -1,7 +1,7 @@
 import { InputSession, InputUsers, SessionResponse, Users } from '../protocols';
 import { usersRepository } from '../repositories/users-repositories';
 import bcrypt from "bcrypt"
-import { emailAlreadyExistsError, emailNotExistsError, invalidPasswordError } from '../errors/errors';
+import { emailAlreadyExistsError, emailNotExistsError, invalidDataError, invalidPasswordError, notFoundProfileError } from '../errors/errors';
 
 async function createUserRegister(name: string, lastName: string, birthday: Date, phone: string, email: string, password: string, profileUrl: string): Promise<Users> {
   const userData: InputUsers = { name, lastName, birthday, phone, email, password, profileUrl };
@@ -29,8 +29,15 @@ async function createUserLogin(email: string, password: string): Promise<Session
   return userLogin;
 }
 
+async function getProfileById(id: number) {
+  if (!id || isNaN(id)) throw invalidDataError('id does not exist');
+  const profile = await usersRepository.findUserProfileById(id);
+  if (!profile) throw notFoundProfileError("Not able to find the profile");
+  return profile;
+}
 
 export const usersService = {
   createUserRegister,
-  createUserLogin
+  createUserLogin,
+  getProfileById
 };

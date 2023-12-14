@@ -37,3 +37,19 @@ export function userIdNotExist(message?: string) {
     message: message || "UserId does not exist",
   };
 }
+
+export function invalidDataError(message?: string) {
+  return {
+    type: "application",
+    code: 409,
+    message: message || "This id does not exist.",
+  };
+}
+
+export function notFoundProfileError(message?: string) {
+  return {
+    type: "application",
+    code: 409,
+    message: message || "Could not find the Profile.",
+  };
+}
