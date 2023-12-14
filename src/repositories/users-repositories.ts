@@ -81,6 +81,36 @@ async function findAllUsers() {
   return result;
 }
 
+async function deleteUserComments(userId: number) {
+  await prisma.comment.deleteMany({
+    where: { userId },
+  });
+}
+
+async function deleteUserPosts(userId: number) {
+  await prisma.post.deleteMany({
+    where: { userId },
+  });
+}
+
+async function deleteUserFollowers(userId: number) {
+  await prisma.follow.deleteMany({
+    where: { followedId: userId },
+  });
+}
+
+async function deleteUserFollowing(userId: number) {
+  await prisma.follow.deleteMany({
+    where: { followerId: userId },
+  });
+}
+
+async function deleteUserProfile(userId: number) {
+  await prisma.user.delete({
+    where: { id: userId },
+  });
+}
+
 
 export const usersRepository = {
   createUserRegister,
@@ -89,5 +119,10 @@ export const usersRepository = {
   findSessionByToken,
   findUserProfileById,
   updateUserProfile,
-  findAllUsers
+  findAllUsers,
+  deleteUserComments,
+  deleteUserPosts,
+  deleteUserFollowers,
+  deleteUserFollowing,
+  deleteUserProfile
 };

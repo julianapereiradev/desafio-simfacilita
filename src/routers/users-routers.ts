@@ -10,6 +10,7 @@ usersRouter.post('/signup', validateSchemaMiddleware(usersSchema), usersControll
 usersRouter.post('/signin', validateSchemaMiddleware(sessionsSchema), usersController.userLogin);
 usersRouter.get('/user/:id', usersController.getProfileById);
 usersRouter.put('/user/:id', validateSchemaMiddleware(usersSchema), usersController.updateProfileId);
+usersRouter.delete('/user/:id', usersController.deleteProfileId);
 usersRouter.get('/users', usersController.getAllUsers);
 
 export { usersRouter };

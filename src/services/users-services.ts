@@ -51,10 +51,28 @@ async function findAllUsers() {
   return allUsers;
 }
 
+async function deleteUserProfile (id: number) {
+  if (!id || isNaN(id)) throw invalidDataError('id does not exist');
+  
+  const profile = await usersRepository.findUserProfileById(id);
+  console.log('profile', profile)
+  if (!profile) throw notFoundProfileError("Not able to find the profile");
+  
+
+  await usersRepository.deleteUserComments(id);
+  await usersRepository.deleteUserPosts(id);
+  await usersRepository.deleteUserFollowers(id);
+  await usersRepository.deleteUserFollowing(id);
+
+  const userDelete = await usersRepository.deleteUserProfile(id);
+  return userDelete;
+}
+
 export const usersService = {
   createUserRegister,
   createUserLogin,
   getProfileById,
   updateUserProfile,
-  findAllUsers
+  findAllUsers,
+  deleteUserProfile
 };
