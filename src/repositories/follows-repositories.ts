@@ -14,7 +14,7 @@ async function createFollow(followerId: number, followedId: number) {
   
   async function findFollowers(userId: number) {
     return prisma.follow.findMany({
-      where: { followerId: userId },
+      where: { followedId: userId },
       select: { followerId: true },
     });
   }
