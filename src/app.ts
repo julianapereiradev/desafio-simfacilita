@@ -6,6 +6,7 @@ import cors from 'cors';
 import { usersRouter } from './routers/users-routers';
 import { handleApplicationErrors } from './middlewares/error-handling-middleware';
 import { postsRouter } from "./routers/post-routers";
+import { commentsRouter } from "./routers/comments-routers";
 
 const app = express();
 
@@ -17,6 +18,7 @@ app
   })
   .use('/', usersRouter)
   .use('/', postsRouter)
+  .use('/', commentsRouter)
   .use(handleApplicationErrors);
 
 export default app;

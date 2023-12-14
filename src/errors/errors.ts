@@ -53,3 +53,11 @@ export function notFoundProfileError(message?: string) {
     message: message || "Could not find the Profile.",
   };
 }
+
+export function invalidPostError(message?: string) {
+  return {
+    type: "application",
+    code: 409,
+    message: message || "This postId does not exist.",
+  };
+}

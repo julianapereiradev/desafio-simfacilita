@@ -13,7 +13,9 @@ async function createPost({userId, description}) {
 }
 
 async function findAllPosts() {
-  const result = await prisma.post.findMany();
+  const result = await prisma.post.findMany({
+    include: {Comment: true}
+  });
   return result;
 }
 

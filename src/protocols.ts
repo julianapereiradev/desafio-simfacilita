@@ -47,3 +47,9 @@ export type InputPosts = {
   userId: number;
   description: string;
 };
+
+export type InputComment = {
+  userId: number;
+  postId: number;
+  comment: string;
+};
