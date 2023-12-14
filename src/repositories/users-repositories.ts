@@ -81,34 +81,32 @@ async function findAllUsers() {
   return result;
 }
 
-async function deleteUserComments(userId: number) {
-  await prisma.comment.deleteMany({
-    where: { userId },
-  });
-}
-
-async function deleteUserPosts(userId: number) {
-  await prisma.post.deleteMany({
-    where: { userId },
-  });
-}
-
-async function deleteUserFollowers(userId: number) {
-  await prisma.follow.deleteMany({
-    where: { followedId: userId },
-  });
-}
-
-async function deleteUserFollowing(userId: number) {
-  await prisma.follow.deleteMany({
-    where: { followerId: userId },
-  });
-}
-
 async function deleteUserProfile(userId: number) {
-  await prisma.user.delete({
-    where: { id: userId },
-  });
+  try {
+    const userPosts = await prisma.post.findMany({
+      where: { userId },
+      select: { id: true },
+    });
+
+    const userSessions = await prisma.session.findMany({
+      where: { userId },
+      select: { id: true },
+    });
+
+    const postIds = userPosts.map((post) => post.id);
+    const sessionIds = userSessions.map((session) => session.id);
+
+    await prisma.$transaction([
+      prisma.comment.deleteMany({ where: { postId: { in: postIds } } }),
+      prisma.post.deleteMany({ where: { userId } }),
+      prisma.follow.deleteMany({ where: { OR: [{ followerId: userId }, { followedId: userId }] } }),
+      prisma.session.deleteMany({ where: { id: { in: sessionIds } } }),
+      prisma.user.delete({ where: { id: userId } }),
+    ]);
+  } catch (error) {
+    console.error("Error deleting user profile:", error);
+    throw error; // Re-throw the error to be caught by the calling function
+  }
 }
 
 
@@ -120,9 +118,5 @@ export const usersRepository = {
   findUserProfileById,
   updateUserProfile,
   findAllUsers,
-  deleteUserComments,
-  deleteUserPosts,
-  deleteUserFollowers,
-  deleteUserFollowing,
   deleteUserProfile
 };

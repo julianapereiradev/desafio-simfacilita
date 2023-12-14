@@ -41,9 +41,7 @@ export async function getAllUsers(_req: Request, res: Response) {
 
 export async function deleteProfileId(req: Request, res: Response) {
   const id = Number(req.params.id);
-  console.log('idd', id)
   const result = await usersService.deleteUserProfile(id);
-  console.log('resull de delete controller', result)
   return res.status(httpStatus.OK).send(result);
 }
 

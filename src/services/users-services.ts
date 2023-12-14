@@ -57,12 +57,6 @@ async function deleteUserProfile (id: number) {
   const profile = await usersRepository.findUserProfileById(id);
   console.log('profile', profile)
   if (!profile) throw notFoundProfileError("Not able to find the profile");
-  
-
-  await usersRepository.deleteUserComments(id);
-  await usersRepository.deleteUserPosts(id);
-  await usersRepository.deleteUserFollowers(id);
-  await usersRepository.deleteUserFollowing(id);
 
   const userDelete = await usersRepository.deleteUserProfile(id);
   return userDelete;
