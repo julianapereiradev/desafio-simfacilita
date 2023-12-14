@@ -46,9 +46,15 @@ async function updateUserProfile(id: number, name: string, lastName: string, bir
   const userRegister = await usersRepository.updateUserProfile(userProfileData);
 }
 
+async function findAllUsers() {
+  const allUsers= await usersRepository.findAllUsers();
+  return allUsers;
+}
+
 export const usersService = {
   createUserRegister,
   createUserLogin,
   getProfileById,
-  updateUserProfile
+  updateUserProfile,
+  findAllUsers
 };

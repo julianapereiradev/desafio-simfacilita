@@ -34,10 +34,16 @@ export async function updateProfileId(req: Request, res: Response) {
   return res.status(httpStatus.OK).send(result);
 }
 
+export async function getAllUsers(_req: Request, res: Response) {
+  const result = await usersService.findAllUsers();
+  return res.status(httpStatus.OK).send(result);
+}
+
 
 export const usersController = {
   userRegister,
   userLogin,
   getProfileById,
-  updateProfileId
+  updateProfileId,
+  getAllUsers
 };

@@ -69,6 +69,18 @@ async function updateUserProfile({ id, name, lastName, birthday, phone, email, p
   });
 }
 
+async function findAllUsers() {
+  const result = await prisma.user.findMany({
+    select: {
+      name: true,
+      lastName: true,
+      profileUrl: true,
+    },
+  });
+
+  return result;
+}
+
 
 export const usersRepository = {
   createUserRegister,
@@ -76,5 +88,6 @@ export const usersRepository = {
   createUserLogin,
   findSessionByToken,
   findUserProfileById,
-  updateUserProfile
+  updateUserProfile,
+  findAllUsers
 };
