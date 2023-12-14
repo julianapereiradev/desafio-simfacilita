@@ -1,5 +1,3 @@
-import { Post } from "@prisma/client";
-
 export type ApplicationError = {
   name: string;
   message: string;
@@ -44,8 +42,6 @@ export type SessionResponse = {
   userId: number;
   token: string;
 };
-
-
 
 export type InputPosts = {
   userId: number;

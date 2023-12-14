@@ -12,7 +12,13 @@ async function createPost({userId, description}) {
     });
 }
 
+async function findAllPosts() {
+  const result = await prisma.post.findMany();
+  return result;
+}
+
 export const postsRepository = {
   findSessionByUserId,
   createPost,
+  findAllPosts
 };

@@ -6,6 +6,7 @@ import { postsController } from '../controllers/posts-controllers';
 
 const postsRouter = Router();
 
-postsRouter.post('/home', validateSchemaMiddleware(postsSchema), postsController.createPosts);
+postsRouter.post('/timeline', validateSchemaMiddleware(postsSchema), postsController.createPosts);
+postsRouter.get('/timeline', postsController.getAllPosts);
 
 export { postsRouter };

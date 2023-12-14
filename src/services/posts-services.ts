@@ -14,6 +14,13 @@ async function createPost(userId: number, description: string) {
   return userPost;
 }
 
+async function findAllPosts() {
+  const allPosts = await postsRepository.findAllPosts();
+  return allPosts;
+}
+
+
 export const postsService = {
   createPost,
+  findAllPosts
 };

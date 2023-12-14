@@ -11,6 +11,12 @@ export async function createPosts(req: Request, res: Response) {
   return res.status(httpStatus.CREATED).send(result);
 }
 
+export async function getAllPosts(_req: Request, res: Response) {
+  const result = await postsService.findAllPosts();
+  return res.status(httpStatus.OK).send(result);
+}
+
 export const postsController = {
   createPosts,
+  getAllPosts
 };
