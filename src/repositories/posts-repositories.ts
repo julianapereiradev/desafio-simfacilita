@@ -39,8 +39,36 @@ async function findAllPosts() {
   return result;
 }
 
+async function findUserPostsById(id: number) {
+  return prisma.post.findMany({
+    where: { userId: id },
+    include: {
+      Comment: {
+        include: {
+          User: {
+            select: {
+              name: true,
+              lastName: true,
+              profileUrl: true,
+            },
+          },
+        },
+      },
+      User: {
+        select: {
+          name: true,
+          lastName: true,
+          profileUrl: true,
+        },
+      },
+    },
+  });
+}
+
+
 export const postsRepository = {
   findSessionByUserId,
   createPost,
-  findAllPosts
+  findAllPosts,
+  findUserPostsById
 };

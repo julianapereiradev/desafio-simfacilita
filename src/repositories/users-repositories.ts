@@ -72,6 +72,7 @@ async function updateUserProfile({ id, name, lastName, birthday, phone, email, p
 async function findAllUsers() {
   const result = await prisma.user.findMany({
     select: {
+      id: true,
       name: true,
       lastName: true,
       profileUrl: true,

@@ -1,7 +1,7 @@
 {
   "name": "desafio-tecnico",
   "version": "1.0.0",
-  "description": "Desafio Técnico - Quer apostar quanto? (back-end)",
+  "description": "Desafio Técnico - SIM Facilita",
   "main": "index.js",
   "scripts": {
     "build": "tsc",
@@ -19,7 +19,7 @@
     "precommit": "lint-staged",
     "prepare": "husky install"
   },
-  "author": "",
+  "author": "Juliana Pereira da Costa",
   "license": "ISC",
   "devDependencies": {
     "@faker-js/faker": "^8.3.1",
