@@ -1,14 +1,11 @@
 import { emailAlreadyExistsError } from '../errors/errors';
 import prisma from '../database';
 import { InputUsers } from '../protocols';
-import bcrypt from "bcrypt"
 import { v4 as uuid } from "uuid"
 
 async function createUserRegister({ name, lastName, birthday, phone, email, password, profileUrl }: InputUsers) {
-  const hash = bcrypt.hashSync(password, 10)
-
   return prisma.user.create({
-    data: { name, lastName, birthday, phone, email, password: hash, profileUrl },
+    data: { name, lastName, birthday, phone, email, password, profileUrl },
   });
 }
 
@@ -53,8 +50,6 @@ async function updateUserProfile({ id, name, lastName, birthday, phone, email, p
     throw emailAlreadyExistsError("This email already exists!");
   }
 
-  const hash = bcrypt.hashSync(password, 10);
-
   return prisma.user.update({
     where: { id },
     data: {
@@ -63,7 +58,7 @@ async function updateUserProfile({ id, name, lastName, birthday, phone, email, p
       birthday,
       phone,
       email,
-      password: hash,
+      password,
       profileUrl,
     },
   });

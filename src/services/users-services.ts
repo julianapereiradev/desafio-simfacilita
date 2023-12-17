@@ -1,6 +1,5 @@
 import { InputSession, InputUsers, SessionResponse, Users } from '../protocols';
 import { usersRepository } from '../repositories/users-repositories';
-import bcrypt from "bcrypt"
 import { emailAlreadyExistsError, emailNotExistsError, invalidDataError, invalidPasswordError, notFoundProfileError } from '../errors/errors';
 
 async function createUserRegister(name: string, lastName: string, birthday: Date, phone: string, email: string, password: string, profileUrl: string): Promise<Users> {
@@ -21,8 +20,7 @@ async function createUserLogin(email: string, password: string): Promise<Session
   const emailRegistered = await usersRepository.findUsers(loginData.email)
   if (!emailRegistered) throw emailNotExistsError("This email not exist.");
 
-  const correctPassword = bcrypt.compareSync(password, emailRegistered.password)
-  if (!correctPassword) throw invalidPasswordError("This password is not correct.");
+  if (loginData.password !== emailRegistered.password) throw invalidPasswordError("This password is not correct.");
 
   const userLogin = await usersRepository.createUserLogin(emailRegistered.id);
   
@@ -44,6 +42,7 @@ async function updateUserProfile(id: number, name: string, lastName: string, bir
   
   const userProfileData = { id, name, lastName, birthday, phone, email, password, profileUrl };
   const userRegister = await usersRepository.updateUserProfile(userProfileData);
+  return userRegister
 }
 
 async function findAllUsers() {
