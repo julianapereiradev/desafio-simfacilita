@@ -29,7 +29,7 @@ model User {
 model Session {
   id        Int      @id @default(autoincrement())
   userId    Int
-  User      User     @relation(fields: [userId], references: [id])
+   User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   token     String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -39,14 +39,14 @@ model Follow {
   id         Int  @id @default(autoincrement())
   followerId Int
   followedId Int
-  User       User @relation("Follower", fields: [followerId], references: [id])
-  Followed   User @relation("Followed", fields: [followedId], references: [id])
+  User       User @relation("Follower", fields: [followerId], references: [id], onDelete: Cascade)
+  Followed   User @relation("Followed", fields: [followedId], references: [id], onDelete: Cascade)
 }
 
 model Post {
   id          Int       @id @default(autoincrement())
   userId      Int
-  User        User      @relation(fields: [userId], references: [id])
+ User        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   description String    @db.VarChar(500)
   createdAt   DateTime  @default(now())
   Comment     Comment[]
@@ -55,9 +55,9 @@ model Post {
 model Comment {
   id        Int      @id @default(autoincrement())
   postId    Int
-  Post      Post     @relation(fields: [postId], references: [id])
+  Post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   userId    Int
-  User      User     @relation(fields: [userId], references: [id])
+  User      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   comment   String   @db.VarChar(150)
   createdAt DateTime @default(now())
 }
