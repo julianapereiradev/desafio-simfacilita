@@ -1,7 +1,7 @@
 import { emailAlreadyExistsError } from '../errors/errors';
 import prisma from '../database';
 import { InputUsers } from '../protocols';
-import { v4 as uuid } from "uuid"
+import { v4 as uuid } from 'uuid';
 
 async function createUserRegister({ name, lastName, birthday, phone, email, password, profileUrl }: InputUsers) {
   return prisma.user.create({
@@ -16,7 +16,7 @@ async function findUsers(email: string) {
 }
 
 async function createUserLogin(userId: number) {
-  const tokenUuid = uuid()
+  const tokenUuid = uuid();
 
   return prisma.session.create({
     data: { userId, token: tokenUuid },
@@ -47,7 +47,7 @@ async function updateUserProfile({ id, name, lastName, birthday, phone, email, p
   });
 
   if (existingUser) {
-    throw emailAlreadyExistsError("This email already exists!");
+    throw emailAlreadyExistsError('This email already exists!');
   }
 
   return prisma.user.update({
@@ -100,11 +100,10 @@ async function deleteUserProfile(userId: number) {
       prisma.user.delete({ where: { id: userId } }),
     ]);
   } catch (error) {
-    console.error("Error deleting user profile:", error);
-    throw error; // Re-throw the error to be caught by the calling function
+    console.error('Error deleting user profile:', error);
+    throw error;
   }
 }
-
 
 export const usersRepository = {
   createUserRegister,
@@ -114,5 +113,5 @@ export const usersRepository = {
   findUserProfileById,
   updateUserProfile,
   findAllUsers,
-  deleteUserProfile
+  deleteUserProfile,
 };

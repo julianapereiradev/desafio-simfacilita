@@ -6,10 +6,10 @@ async function findSessionByUserId(userId: number) {
   });
 }
 
-async function createPost({userId, description}) {
-    return prisma.post.create({
-        data: {userId, description},
-    });
+async function createPost({ userId, description }) {
+  return prisma.post.create({
+    data: { userId, description },
+  });
 }
 
 async function findAllPosts() {
@@ -65,10 +65,9 @@ async function findUserPostsById(id: number) {
   });
 }
 
-
 export const postsRepository = {
   findSessionByUserId,
   createPost,
   findAllPosts,
-  findUserPostsById
+  findUserPostsById,
 };

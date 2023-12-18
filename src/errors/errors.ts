@@ -1,63 +1,63 @@
 export function emailAlreadyExistsError(message?: string) {
   return {
-    type: "application",
+    type: 'application',
     code: 404,
-    message: message || "This email already exists!",
+    message: message || 'This email already exists!',
   };
 }
 
 export function emailNotExistsError(message?: string) {
   return {
-    type: "application",
+    type: 'application',
     code: 404,
-    message: message || "This email not exist.",
+    message: message || 'This email not exist.',
   };
 }
 
 export function invalidPasswordError(message?: string) {
   return {
-    type: "application",
+    type: 'application',
     code: 404,
-    message: message || "This password is not correct.",
+    message: message || 'This password is not correct.',
   };
 }
 
 export function invalidToken(message?: string) {
   return {
-    type: "application",
+    type: 'application',
     code: 409,
-    message: message || "This token is invalid.",
+    message: message || 'This token is invalid.',
   };
 }
 
 export function userIdNotExist(message?: string) {
   return {
-    type: "application",
+    type: 'application',
     code: 409,
-    message: message || "UserId does not exist",
+    message: message || 'UserId does not exist',
   };
 }
 
 export function invalidDataError(message?: string) {
   return {
-    type: "application",
+    type: 'application',
     code: 409,
-    message: message || "This id does not exist.",
+    message: message || 'This id does not exist.',
   };
 }
 
 export function notFoundProfileError(message?: string) {
   return {
-    type: "application",
+    type: 'application',
     code: 409,
-    message: message || "Could not find the Profile.",
+    message: message || 'Could not find the Profile.',
   };
 }
 
 export function invalidPostError(message?: string) {
   return {
-    type: "application",
+    type: 'application',
     code: 409,
-    message: message || "This postId does not exist.",
+    message: message || 'This postId does not exist.',
   };
 }

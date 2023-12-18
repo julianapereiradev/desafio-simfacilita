@@ -1,13 +1,13 @@
-import "express-async-errors";
+import 'express-async-errors';
 import express, { Request, Response, json } from 'express';
 import httpStatus from 'http-status';
 import 'express-async-errors';
 import cors from 'cors';
 import { usersRouter } from './routers/users-routers';
 import { handleApplicationErrors } from './middlewares/error-handling-middleware';
-import { postsRouter } from "./routers/post-routers";
-import { commentsRouter } from "./routers/comments-routers";
-import { followsRouter } from "./routers/follows-routers";
+import { postsRouter } from './routers/post-routers';
+import { commentsRouter } from './routers/comments-routers';
+import { followsRouter } from './routers/follows-routers';
 
 const app = express();
 

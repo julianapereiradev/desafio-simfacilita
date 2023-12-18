@@ -1,5 +1,5 @@
-import { Request, Response, NextFunction } from "express";
-import { ObjectSchema } from "joi";
+import { Request, Response, NextFunction } from 'express';
+import { ObjectSchema } from 'joi';
 
 export function validateSchemaMiddleware(schema: ObjectSchema) {
   return (req: Request, res: Response, next: NextFunction) => {
@@ -8,9 +8,7 @@ export function validateSchemaMiddleware(schema: ObjectSchema) {
       convert: false,
     });
     if (error) {
-      return res
-        .status(422)
-        .send({ type: "invalid body!", message: error.message });
+      return res.status(422).send({ type: 'invalid body!', message: error.message });
     }
     next();
   };

@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import { InputSession} from '../protocols';
+import { InputSession } from '../protocols';
 
 export const sessionsSchema = Joi.object<InputSession>({
   email: Joi.string().email().required(),

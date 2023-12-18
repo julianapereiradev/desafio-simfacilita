@@ -8,5 +8,5 @@ export const usersSchema = Joi.object<InputUsers>({
   phone: Joi.string().required(),
   email: Joi.string().email().required(),
   password: Joi.string().required(),
-  profileUrl: Joi.string().uri().required()
+  profileUrl: Joi.string().uri().required(),
 });

@@ -54,7 +54,6 @@ async function deleteUserProfile (id: number) {
   if (!id || isNaN(id)) throw invalidDataError('id does not exist');
   
   const profile = await usersRepository.findUserProfileById(id);
-  console.log('profile', profile)
   if (!profile) throw notFoundProfileError("Not able to find the profile");
 
   const userDelete = await usersRepository.deleteUserProfile(id);

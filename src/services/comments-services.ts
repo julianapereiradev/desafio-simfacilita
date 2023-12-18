@@ -1,15 +1,13 @@
 import { commentsRepository } from '../repositories/comments-repositories';
-import {InputComment } from '../protocols';
+import { InputComment } from '../protocols';
 import { invalidPostError } from '../errors/errors';
-
 
 async function createComment(userId: number, postId: number, comment: string) {
   const commentData: InputComment = { userId, postId, comment };
 
   const postExist = await commentsRepository.findPostById(postId);
-  if (!postExist) throw invalidPostError("Post does not exist");
+  if (!postExist) throw invalidPostError('Post does not exist');
 
-  // Criar o comentário
   const newComment = await commentsRepository.createComment(commentData);
   return newComment;
 }

@@ -23,9 +23,8 @@ export async function followOrUnfollowUser(req: Request, res: Response) {
   return res.status(httpStatus.OK).send(result);
 }
 
-
 export const followsController = {
   getFollowers,
   getFollowing,
-  followOrUnfollowUser
+  followOrUnfollowUser,
 };
