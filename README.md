@@ -1,70 +1,38 @@
-## Technical Challenge - Social Network?
+# Projeto SIM Facilita - Backend
 
-Back-end application for social network.
+## 1. Seção Inicial
+Este projeto consiste na implementação do desafio proposto pela SIM Facilita para criar uma plataforma de rede social simples. Você pode acessar a demo do backend [aqui](link_da_demo).
 
-### Deployment link
+## 2. Sobre
+O backend apresenta funcionalidades-chave, incluindo cadastro, login, posts, comentários, seguir/deixar de seguir usuários, atualizar informações de perfil e exclusão de conta.
 
-- Soon
-
-### Technologies Used
-
-For this project, the following technologies were used:
-
-- Node (versão 18.16.0);
-- Express
+## 3. Tecnologias
+- Node.js
 - Typescript
-- Prisma
+- PrismaORM
+- Cors
+- Express
+- Express-async-errors
 - Postgres
-- Jest and Supertest
+- Http-status
+- Joi
+- Dotenv
 
-### How it Works
+## 4. Como Rodar
+1. Clone o projeto
+2. Instale as dependências com `npm i`
+3. Crie os arquivos `.env` e `.env.test` na raiz do projeto, usando o `.env.example` como base e configurando o PostgreSQL
+4. Execute os scripts para rodar as migrações:
+   - `npm run dev:migration:run`
+   - `npm run test:migration:run`
+   - `npm run dev:migration:generate`
+   - `npm run test:migration:generate`
+5. Por fim, rode `npm run dev`
+   - Para testes, utilize `npm run test`
 
-This project is a REST API for a regular social network. It has some entities:
+## 5. Pontos de Melhorias Futuras
+- Implementar criptografia nas senhas
+- Adicionar tokenização do usuário
+- Permitir exclusão de posts e comentários
 
-For the `users` entity, two routes were created:
-
-- POST `/signup`: Creates the user register.
-
-- POST `/signin`: Creates a session to save the token for this user.
-
-
-### How to Run and Configure for Development and Testing
-
-1. Clone this repository.
-
-2. Install all dependencies with the command:
-
-```bash
-npm i
-
-```
-
-3. Configure the .env and .env.test files using the .env.example file.
-
-4. Execute all scripts to run migrations:
-
-```bash
-npm run dev:migration:run
-```
-```bash
-npm run test:migration:run
-```
-```bash
-npm run dev:migration:generate
-```
-```bash
-npm run test:migration:generate
-```
-
-5. Run the backend in a development environment:
-
-```bash
-npm run dev
-```
-
-## How to Run Tests
-1. After configuring the .env.test file using the .env.example file and running the database migration script for the test environment, use the following command in the terminal:
-
-```bash
-npm run test
-```
+Espero que essas instruções sejam úteis. Em caso de dúvidas ou sugestões, sinta-se à vontade para entrar em contato.
