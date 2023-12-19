@@ -6,6 +6,10 @@ Este projeto consiste na implementação do desafio proposto pela SIM Facilita p
 ## 2. Sobre
 O backend apresenta funcionalidades-chave, incluindo cadastro, login, posts, comentários, seguir/deixar de seguir usuários, atualizar informações de perfil e exclusão de conta.
 
+Bônus adicionado:
+- Segurança: biblioteca bcrypt para que as senhas venham encriptadas;
+- Segurança: Persistência do usuário por tokenização;
+
 ## 3. Tecnologias
 - Node.js
 - Typescript
@@ -31,8 +35,8 @@ O backend apresenta funcionalidades-chave, incluindo cadastro, login, posts, com
    - Para testes, utilize `npm run test`
 
 ## 5. Pontos de Melhorias Futuras
-- Implementar criptografia nas senhas
-- Adicionar tokenização do usuário
-- Permitir exclusão de posts e comentários
+- Implementar testes de integração e unitários;
+- Permitir exclusão de posts e comentários;
+- Feed apenas com os posts da pessoa que você segue.
 
 Espero que essas instruções sejam úteis. Em caso de dúvidas ou sugestões, sinta-se à vontade para entrar em contato.
