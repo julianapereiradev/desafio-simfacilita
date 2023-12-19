@@ -1,11 +1,12 @@
-import { emailAlreadyExistsError } from '../errors/errors';
 import prisma from '../database';
-import { InputUsers } from '../protocols';
+import { InputUpdateUsersWithId, InputUsers } from '../protocols';
 import { v4 as uuid } from 'uuid';
+import bcrypt from "bcrypt"
 
 async function createUserRegister({ name, lastName, birthday, phone, email, password, profileUrl }: InputUsers) {
+  const hash = bcrypt.hashSync(password, 10) 
   return prisma.user.create({
-    data: { name, lastName, birthday, phone, email, password, profileUrl },
+    data: { name, lastName, birthday, phone, email, password: hash, profileUrl },
   });
 }
 
@@ -20,13 +21,14 @@ async function createUserLogin(userId: number) {
 
   return prisma.session.create({
     data: { userId, token: tokenUuid },
+    include: {User: true}
   });
 }
 
 async function findSessionByToken(token: string) {
   return prisma.session.findFirst({
     where: { token },
-    select: { id: true, userId: true, token: true },
+    select: { id: true, userId: true, User: {select: { name: true}}, token: true },
   });
 }
 
@@ -36,8 +38,8 @@ async function findUserProfileById(id: number) {
   });
 }
 
-async function updateUserProfile({ id, name, lastName, birthday, phone, email, password, profileUrl }) {
-  const existingUser = await prisma.user.findFirst({
+async function existingUser(email: string, id: number) {
+  return prisma.user.findFirst({
     where: {
       email: email,
       id: {
@@ -45,11 +47,9 @@ async function updateUserProfile({ id, name, lastName, birthday, phone, email, p
       },
     },
   });
+}
 
-  if (existingUser) {
-    throw emailAlreadyExistsError('This email already exists!');
-  }
-
+async function updateUserProfile({ id, name, lastName, birthday, phone, email, profileUrl }: InputUpdateUsersWithId) { 
   return prisma.user.update({
     where: { id },
     data: {
@@ -58,8 +58,8 @@ async function updateUserProfile({ id, name, lastName, birthday, phone, email, p
       birthday,
       phone,
       email,
-      password,
       profileUrl,
+
     },
   });
 }
@@ -75,6 +75,23 @@ async function findAllUsers() {
   });
 
   return result;
+}
+
+async function findPasswordByUserId(id: number) {
+  return prisma.user.findFirst({
+    where: { id },
+  });
+}
+
+
+async function updatePasswordRepo({id, newPassword }) {
+  return prisma.user.update({
+    where: { id },
+    data: {
+      password: newPassword
+
+    },
+  });
 }
 
 async function deleteUserProfile(userId: number) {
@@ -105,6 +122,7 @@ async function deleteUserProfile(userId: number) {
   }
 }
 
+
 export const usersRepository = {
   createUserRegister,
   findUsers,
@@ -114,4 +132,7 @@ export const usersRepository = {
   updateUserProfile,
   findAllUsers,
   deleteUserProfile,
+  existingUser,
+  updatePasswordRepo,
+  findPasswordByUserId
 };

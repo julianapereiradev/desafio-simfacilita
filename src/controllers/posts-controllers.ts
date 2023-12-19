@@ -4,9 +4,10 @@ import { InputPosts } from '../protocols';
 import { postsService } from '../services/posts-services';
 
 export async function createPosts(req: Request, res: Response) {
-  const { userId, description } = req.body as InputPosts;
+  const session = res.locals;
+  const { description } = req.body as InputPosts;
 
-  const result = await postsService.createPost(userId, description);
+  const result = await postsService.createPost(session.userId, description);
   return res.status(httpStatus.CREATED).send(result);
 }
 
@@ -17,6 +18,7 @@ export async function getAllPosts(_req: Request, res: Response) {
 
 export async function getAllPostsById(req: Request, res: Response) {
   const id = Number(req.params.id);
+  console.log("oiii", id)
   const userPosts = await postsService.getAllPostsById(id);
   res.status(httpStatus.OK).send(userPosts);
 }

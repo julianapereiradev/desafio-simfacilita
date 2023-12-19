@@ -61,3 +61,19 @@ export function invalidPostError(message?: string) {
     message: message || 'This postId does not exist.',
   };
 }
+
+export function actualPasswordError(message?: string) {
+  return {
+    type: 'application',
+    code: 404,
+    message: message || 'This is not your actual password.',
+  };
+}
+
+export function unaunthorizedError(message?: string) {
+  return {
+    type: 'application',
+    code: 404,
+    message: message || 'Unaunthorized',
+  };
+}

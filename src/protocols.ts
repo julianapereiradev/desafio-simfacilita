@@ -21,6 +21,25 @@ export type InputUsers = {
   profileUrl: string;
 };
 
+export type InputUpdateUsers = {
+  name: string;
+  lastName: string;
+  birthday: Date;
+  phone: string;
+  email: string;
+  profileUrl: string;
+};
+
+export type InputUpdateUsersWithId = {
+  id: number;
+  name?: string;
+  lastName?: string;
+  birthday?: Date;
+  phone?: string;
+  email?: string;
+  profileUrl?: string;
+};
+
 export type Users = {
   id: number;
   name: string;
@@ -56,4 +75,9 @@ export type InputComment = {
 
 export type InputFollow = {
   followerId: number;
+};
+
+export type InputPasswordChange = {
+  actualPassword: string;
+  newPassword: string;
 };

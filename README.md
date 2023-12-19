@@ -1,7 +1,7 @@
 # Projeto SIM Facilita - Backend
 
 ## 1. Seção Inicial
-Este projeto consiste na implementação do desafio proposto pela SIM Facilita para criar uma plataforma de rede social simples. Você pode acessar o lindo do deploy do backend [aqui](https://desafio-sim-facilita.onrender.com).
+Este projeto consiste na implementação do desafio proposto pela SIM Facilita para criar uma plataforma de rede social simples. Você pode acessar o link do deploy do backend [aqui](https://desafio-sim-facilita.onrender.com).
 
 ## 2. Sobre
 O backend apresenta funcionalidades-chave, incluindo cadastro, login, posts, comentários, seguir/deixar de seguir usuários, atualizar informações de perfil e exclusão de conta.
